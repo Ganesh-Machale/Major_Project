@@ -1,4 +1,9 @@
 {
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.9.2"
+  },
   "name": "majorproject",
   "version": "1.0.0",
   "description": "",
@@ -6,13 +11,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ganesh-Machale/Major_Project.git"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Ganesh Machale",
   "license": "ISC",
   "type": "commonjs",
-  "dependencies": {
-    "ejs": "^6.0.1",
-    "express": "^5.2.1",
-    "mongoose": "^9.9.2"
-  }
+  "bugs": {
+    "url": "https://github.com/Ganesh-Machale/Major_Project/issues"
+  },
+  "homepage": "https://github.com/Ganesh-Machale/Major_Project#readme"
 }
