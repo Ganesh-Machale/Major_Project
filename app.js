@@ -5,6 +5,9 @@ const express = require("express");
  const path = require("path");
 
 
+ app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
  const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
 main()
@@ -22,7 +25,12 @@ async function main() {
 
  app.get("/",(req,res)=>{
     res.send("Hi, i am Root");
- })
+ });
+
+    app.get("/listing", async(req,res)=>{
+          const allListing = await Listing.find({});
+        res.render("listings/index.ejs", { allListing });
+    });
 
 //  app.get("/testListing", async (req, res) => {
 //   let sampleListing = new Listing({
