@@ -26,11 +26,18 @@ async function main() {
  app.get("/",(req,res)=>{
     res.send("Hi, i am Root");
  });
-
+    
+    //  Index Route 
     app.get("/listing", async(req,res)=>{
-          const allListing = await Listing.find({});
-        res.render("listings/index.ejs", { allListing });
+          const allListings = await Listing.find({});
+        res.render("listings/index.ejs", { allListings });
     });
+
+    //  Show Route 
+    app.get("/listing/:id",async(req,res)=>{
+   let { id } = req.params;
+    console.log(id);
+     })
 
 //  app.get("/testListing", async (req, res) => {
 //   let sampleListing = new Listing({
