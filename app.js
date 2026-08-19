@@ -34,14 +34,40 @@ async function main() {
         res.render("listings/index.ejs", { allListings });
     });
 
+    // New Route
+     app.get("/listing/new", (req,res)=>{
+      res.render("listings/new.ejs");
+     });
+
     //  Show Route 
     app.get("/listing/:id",async(req,res)=>{
    let { id } = req.params;
        let listing = await Listing.findById(id);
       res.render("listings/show.ejs", {listing});
       
-     })
+     });
 
+     //Create list Route
+     app.post("/listing",async(req,res)=>{
+   let {id,title,description,price,location,country} = req.body;
+       const newListing = await Listing.insertOne({ 
+        title:title,
+         description:description,
+         price:price,
+         location:location,
+         country:country,
+       });
+       newListing.save().then((res)=>{
+        console.log(res);
+       })
+       .catch((err)=>{
+        console.log(err);
+       });
+       res.redirect("/listing");
+       
+     });
+
+      
 //  app.get("/testListing", async (req, res) => {
 //   let sampleListing = new Listing({
 //     title: "My New Villa",
