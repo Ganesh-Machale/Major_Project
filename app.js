@@ -47,25 +47,41 @@ async function main() {
       
      });
 
+    //  My Own logic rather then copy
      //Create list Route
-     app.post("/listing",async(req,res)=>{
-   let {id,title,description,price,location,country} = req.body;
-       const newListing = await Listing.insertOne({ 
-        title:title,
-         description:description,
-         price:price,
-         location:location,
-         country:country,
-       });
-       newListing.save().then((res)=>{
-        console.log(res);
-       })
-       .catch((err)=>{
-        console.log(err);
-       });
-       res.redirect("/listing");
+
+
+
+  //    app.post("/listing",async(req,res)=>{
+  //  let {id,title,description,price,location,country} = req.body;
+  //      const newListing = await Listing.insertOne({ 
+  //       title:title,
+  //        description:description,
+  //        price:price,
+  //        location:location,
+  //        country:country,
+  //      });
+  //      newListing.save().then((res)=>{
+  //       console.log(res);
+  //      })
+  //      .catch((err)=>{
+  //       console.log(err);
+  //      });
+  //      res.redirect("/listing");
        
+  //    });
+
+
+
+
+  //Create list Route by Mam logic
+     app.post("/listing",async(req,res)=>{
+        const newlisting  = new Listing(req.body.listing);
+        await newlisting.save();
+       res.redirect("/listing");
+        console.log(newlisting);
      });
+
 
       
 //  app.get("/testListing", async (req, res) => {
