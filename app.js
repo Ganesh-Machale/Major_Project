@@ -82,7 +82,11 @@ async function main() {
         console.log(newlisting);
      });
 
+// Edit Route
 
+ app.get("/listing/:id/edit",async(req,res)=>{
+    res.render("edit.ejs");
+ })
       
 //  app.get("/testListing", async (req, res) => {
 //   let sampleListing = new Listing({
