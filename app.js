@@ -84,8 +84,10 @@ async function main() {
 
 // Edit Route
 
- app.get("/listing/:id/edit",async(req,res)=>{
-    res.render("edit.ejs");
+ app.get("/listing/:id/edit", async(req,res)=>{
+  let { id } = req.params;
+       let listing = await Listing.findById(id);
+    res.render("listings/edit.ejs",{ listing });
  })
       
 //  app.get("/testListing", async (req, res) => {
