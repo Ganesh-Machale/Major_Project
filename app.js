@@ -3,7 +3,7 @@ const express = require("express");
  const mongoose = require("mongoose");
  const Listing = require("./models/listing.js");
  const path = require("path");
-
+   const methodOverride = require("method-override");
 
  app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -89,6 +89,10 @@ async function main() {
        let listing = await Listing.findById(id);
     res.render("listings/edit.ejs",{ listing });
  })
+
+   app.put("listing/:id", async (req,res)=>{
+res/redirect("/listing");
+   })
       
 //  app.get("/testListing", async (req, res) => {
 //   let sampleListing = new Listing({
