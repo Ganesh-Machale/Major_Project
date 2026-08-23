@@ -8,6 +8,7 @@ const express = require("express");
  app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
  const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
@@ -91,7 +92,9 @@ async function main() {
  })
 
    app.put("listing/:id", async (req,res)=>{
-res/redirect("/listing");
+     let { id } = req.params;
+     await Listing.findByIdAndUpdate(id,{ ...req.body.listing});
+     res.redirect(`/listing`);
    })
       
 //  app.get("/testListing", async (req, res) => {
