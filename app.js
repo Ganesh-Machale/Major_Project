@@ -91,10 +91,10 @@ async function main() {
     res.render("listings/edit.ejs",{ listing });
  })
 
-   app.put("listing/:id", async (req,res)=>{
+   app.put("/listing/:id", async (req,res)=>{
      let { id } = req.params;
      await Listing.findByIdAndUpdate(id,{ ...req.body.listing});
-     res.redirect(`/listing`);
+     res.redirect(`/listing/${id}`);
    })
       
 //  app.get("/testListing", async (req, res) => {
