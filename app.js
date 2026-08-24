@@ -90,12 +90,24 @@ async function main() {
        let listing = await Listing.findById(id);
     res.render("listings/edit.ejs",{ listing });
  })
-
+  
+//  Update Route
    app.put("/listing/:id", async (req,res)=>{
      let { id } = req.params;
      await Listing.findByIdAndUpdate(id,{ ...req.body.listing});
      res.redirect(`/listing/${id}`);
-   })
+   });
+
+  //  Delete Route 
+    app.delete("/listing/:id", async (req,res)=>{
+       let { id } = req.params;
+       await Listing.findByIdAndDelete(id)
+       .then((res)=>{console.log(res)})
+       .catch((err)=>{
+        console.log(err)
+       })
+       res.redirect("/listing");
+    });
       
 //  app.get("/testListing", async (req, res) => {
 //   let sampleListing = new Listing({
