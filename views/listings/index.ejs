@@ -4,10 +4,11 @@
      <ul>
        <% for(let listing of allListings){ %>
           <li><a href="/listing/<%= listing._id %>"> <%= listing.title %></a></li>
+          <li><a href="/listing/<%= listing._id %>"> <%= listing.title %></a></li>
        <% } %>
      </ul>
-     <form method="get" action="/listing/new">
-      <button>Create New</button>
+     <!-- <form method="get" action="/listing/new">
+      <button>Create New</button> -->
     </form>
 </body>
 
