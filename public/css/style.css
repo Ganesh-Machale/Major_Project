@@ -65,3 +65,7 @@ align-items: center;
 .card-text p{
   font-weight: 400;
 }
+
+.listings-link{
+  text-decoration: none; 
+}
