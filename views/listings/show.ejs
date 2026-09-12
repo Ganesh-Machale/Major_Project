@@ -1,6 +1,14 @@
 <% layout('/layouts/boilerplate') -%>
 <body>
     <h1>Listings Details </h1>
+
+      <div class="card">
+              <img class="card-img-top show-img" src="<%= listing.image %>" alt="Card image cap">
+              <div class="card-body">
+             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+         </div>
+      </div> 
+
        <ul>
         <li><%= listing.title %></li>
         <li><%= listing.description %></li>
