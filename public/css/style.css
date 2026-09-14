@@ -62,7 +62,7 @@ align-items: center;
 }
 
 .card-img-top{
-  border-radius: 1rem;
+  border-radius: 1rem !important; 
   width:100%;
   object-fit: cover !important;
 }
@@ -112,4 +112,8 @@ align-items: center;
 
 .btns{
   display:flex;
+}
+.show-card{
+  padding-left: 0;
+  padding-right: 0;
 }
