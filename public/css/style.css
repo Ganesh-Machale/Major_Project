@@ -106,5 +106,10 @@ align-items: center;
 
 
 .show-img{
-  
+  height:30vh;
+   
+}
+
+.btns{
+  display:flex;
 }
