@@ -80,10 +80,14 @@ async function main() {
 
   //Create list Route by Mam logic
      app.post("/listing",async(req,res)=>{
-        const newlisting  = new Listing(req.body.listing);
+      try{
+         const newlisting  = new Listing(req.body.listing);
         await newlisting.save();
        res.redirect("/listing");
-        console.log(newlisting);
+      }
+       catch(err){
+        next(err);
+       }
      });
 
 // Edit Route
@@ -107,7 +111,7 @@ async function main() {
        await Listing.findByIdAndDelete(id)
        .then((res)=>{console.log(res)})
        .catch((err)=>{
-        console.log(err)
+        console.log(err);
        })
        res.redirect("/listing");
     });
@@ -125,6 +129,11 @@ async function main() {
 //   console.log("sample was saved");
 //   res.send("successful testing");
 // });
+ 
+      // Middlewarwe
+      app.use((err,req,res,next)=>{
+        res.send("Something went Wrong");
+      });
 
   app.listen(8080,(req,res)=>{
     console.log("Server is Runing on port 8080");
