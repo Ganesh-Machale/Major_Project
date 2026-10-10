@@ -5,6 +5,7 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -80,23 +81,19 @@ async function main() {
 
   //Create list Route by Mam logic
      app.post("/listing",async(req,res)=>{
-      try{
          const newlisting  = new Listing(req.body.listing);
         await newlisting.save();
        res.redirect("/listing");
-      }
-       catch(err){
-        next(err);
-       }
      });
 
 // Edit Route
 
- app.get("/listing/:id/edit", async(req,res)=>{
-  let { id } = req.params;
-       let listing = await Listing.findById(id);
-    res.render("listings/edit.ejs",{ listing });
- })
+ app.get("/listing/:id/edit", 
+    wrapAsync(async(req,res)=>{
+         let { id } = req.params;
+         let listing = await Listing.findById(id);
+      res.render("listings/edit.ejs",{ listing });
+ }));
   
 //  Update Route
    app.put("/listing/:id", async (req,res)=>{
