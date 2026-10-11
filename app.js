@@ -6,6 +6,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -126,10 +127,15 @@ async function main() {
 //   console.log("sample was saved");
 //   res.send("successful testing");
 // });
- 
+   
+//   app.all("/*splat", (req, res, next) => {
+//         next(new ExpressError(404,"Page not Found!"));
+// });
+
       // Middlewarwe
       app.use((err,req,res,next)=>{
-        res.send("Something went Wrong");
+       let {statusCode = 500 , message="Oof , Something went Wrong!"} = err;
+        res.status(statusCode).send(message);
       });
 
   app.listen(8080,(req,res)=>{
