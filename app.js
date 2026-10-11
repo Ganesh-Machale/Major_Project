@@ -127,10 +127,13 @@ async function main() {
 //   console.log("sample was saved");
 //   res.send("successful testing");
 // });
+
+
    
-//   app.all("/*splat", (req, res, next) => {
-//         next(new ExpressError(404,"Page not Found!"));
-// });
+  //  if user comes to the path that not exits 
+  app.all("/*splat", (req, res, next) => {
+        next(new ExpressError(404,"Page not Found!"));
+});
 
       // Middlewarwe
       app.use((err,req,res,next)=>{
