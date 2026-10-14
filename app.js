@@ -81,11 +81,11 @@ async function main() {
 
 
   //Create list Route by Mam logic
-     app.post("/listing",async(req,res)=>{
+     app.post("/listing", wrapAsync(async(req,res)=>{
          const newlisting  = new Listing(req.body.listing);
         await newlisting.save();
        res.redirect("/listing");
-     });
+     }));
 
 // Edit Route
 
@@ -97,14 +97,14 @@ async function main() {
  }));
   
 //  Update Route
-   app.put("/listing/:id", async (req,res)=>{
+   app.put("/listing/:id", wrapAsync(async (req,res)=>{
      let { id } = req.params;
      await Listing.findByIdAndUpdate(id,{ ...req.body.listing});
      res.redirect(`/listing/${id}`);
-   });
+   }));
 
   //  Delete Route 
-    app.delete("/listing/:id", async (req,res)=>{
+    app.delete("/listing/:id", wrapAsync(async (req,res)=>{
        let { id } = req.params;
        await Listing.findByIdAndDelete(id)
        .then((res)=>{console.log(res)})
@@ -112,7 +112,7 @@ async function main() {
         console.log(err);
        })
        res.redirect("/listing");
-    });
+    }));
       
 //  app.get("/testListing", async (req, res) => {
 //   let sampleListing = new Listing({
