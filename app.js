@@ -138,7 +138,7 @@ async function main() {
       // Middlewarwe
       app.use((err,req,res,next)=>{
        let {statusCode = 500 , message="Oof , Something went Wrong!"} = err;
-        res.status(statusCode).send(message);
+         res.status(statusCode).render("listings/error.ejs", {err});
       });
 
   app.listen(8080,(req,res)=>{
