@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const listingSchema = require("./Schema.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -81,7 +82,13 @@ async function main() {
 
 
   //Create list Route by Mam logic
-     app.post("/listing", wrapAsync(async(req,res)=>{
+     app.post("/listing", wrapAsync(async(req,res,next)=>{
+       let result = listingSchema.validate(req.body);
+        if(result.error){
+          throw new ExpressError(400,result.error);
+        }else{
+          next();
+        }
          const newlisting  = new Listing(req.body.listing);
         await newlisting.save();
        res.redirect("/listing");
