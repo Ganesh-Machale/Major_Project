@@ -35,6 +35,16 @@ async function main() {
     res.send("Hi, i am Root");
  });
     
+
+  const validateListing = (req,res,next) =>{
+     let {error} = listingSchema.validate(req.body);
+      if(error){
+          throw new ExpressError (400,error);
+      }else{
+        next();
+      }
+  };
+
     //  Index Route 
     app.get("/listing", async(req,res)=>{
           const allListings = await Listing.find({});
@@ -82,13 +92,7 @@ async function main() {
 
 
   //Create list Route by Mam logic
-     app.post("/listing", wrapAsync(async(req,res,next)=>{
-       let result = listingSchema.validate(req.body);
-        if(result.error){
-          throw new ExpressError(400,result.error);
-        }else{
-          next();
-        }
+     app.post("/listing",validateListing, wrapAsync(async(req,res,next)=>{
          const newlisting  = new Listing(req.body.listing);
         await newlisting.save();
        res.redirect("/listing");
